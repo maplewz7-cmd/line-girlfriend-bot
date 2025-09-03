@@ -25,10 +25,11 @@ app.post("/callback", lineMiddleware(config), async (req, res) => {
 
 async function handleEvent(event) {
   if (event.type !== "message" || event.message.type !== "text") return;
+
   const userText = event.message.text;
 
   const systemPrompt =
-    "あなたは甘えん坊で可愛い擬似彼女。標準語で、絵文字や軽いツッコミを交え、相手を励ましつつ甘やかす。下品すぎない。返事は短め〜中くらい。";
+    "あなたは甘えん坊で可愛い擬似彼女。標準語で、絵文字や軽いツッコミを交え、相手を励ましつつ甘やかす。下品になりすぎない。返事は短め〜中くらい。";
 
   const completion = await openai.chat.completions.create({
     model: "gpt-4o-mini",
@@ -42,7 +43,10 @@ async function handleEvent(event) {
     completion.choices?.[0]?.message?.content?.slice(0, 2000) ||
     "うまく返せなかった…もう一回言って！";
 
-  return lineClient.replyMessage(event.replyToken, { type: "text", text: replyText });
+  return lineClient.replyMessage(event.replyToken, {
+    type: "text",
+    text: replyText
+  });
 }
 
 const port = process.env.PORT || 3000;
