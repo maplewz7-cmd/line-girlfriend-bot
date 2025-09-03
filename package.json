@@ -1,1 +1,17 @@
-
+{
+  "name": "line-girlfriend-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@line/bot-sdk": "^7.6.0",
+    "express": "^4.19.2",
+    "openai": "^4.59.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
